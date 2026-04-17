@@ -1,7 +1,5 @@
 // frontend/src/App.js
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
-import SplashPage from './pages/SplashPage';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import GamePage from './pages/GamePage';
@@ -16,53 +14,15 @@ import AdminPage from './pages/AdminPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return <div style={{ padding: '50px', textAlign: 'center' }}>Loading...</div>;
-  }
-
   return (
     <Routes>
-      {/* Public Routes - Only login and register are public */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/game" element={<GamePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      
-      {/* Redirect root to login if not logged in, to home if logged in */}
-      <Route path="/" element={
-        user ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />
-      } />
-      
-      {/* Protected Routes - Require login for everything else */}
-      <Route path="/home" element={
-        <ProtectedRoute>
-          <HomePage />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/game" element={
-        <ProtectedRoute>
-          <GamePage />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/about" element={
-        <ProtectedRoute>
-          <AboutPage />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/contact" element={
-        <ProtectedRoute>
-          <ContactPage />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/posts/:id" element={
-        <ProtectedRoute>
-          <PostPage />
-        </ProtectedRoute>
-      } />
       
       <Route path="/create-post" element={
         <ProtectedRoute>
@@ -81,6 +41,8 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
       } />
+      
+      <Route path="/posts/:id" element={<PostPage />} />
       
       <Route path="/admin" element={
         <ProtectedRoute role="admin">
