@@ -1,0 +1,160 @@
+.game-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  background: var(--navy);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+  color: white;
+}
+
+.game-stats {
+  color: var(--cream);
+}
+
+.game-stats span {
+  color: var(--soft-blue);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.anime-picture {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 3px solid var(--navy);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.choices-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.choice-btn {
+  background: var(--blue-gray);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.choice-btn:hover:not(:disabled) {
+  background: var(--soft-blue);
+  transform: translateY(-2px);
+}
+
+.choice-btn.correct {
+  background: #2ecc71;
+}
+
+.choice-btn.wrong {
+  background: #e74c3c;
+}
+
+.choice-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.controls {
+  margin: 20px 0;
+}
+
+.game-btn {
+  background: var(--soft-blue);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0 10px;
+  transition: all 0.3s;
+}
+
+.game-btn:hover:not(:disabled) {
+  background: var(--navy);
+  transform: translateY(-2px);
+}
+
+.game-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.feedback {
+  margin: 15px 0;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 30px;
+}
+
+.correct-feedback {
+  color: #2ecc71;
+}
+
+.wrong-feedback {
+  color: #e74c3c;
+}
+
+.results-screen {
+  background: var(--blue-gray);
+  padding: 40px;
+  border-radius: 15px;
+  margin: 30px auto;
+  max-width: 500px;
+  color: white;
+}
+
+.final-score {
+  font-size: 48px;
+  color: var(--soft-blue);
+  margin: 20px 0;
+}
+
+.score-message {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.results-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .choices-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .anime-picture {
+    height: 200px;
+  }
+  
+  .game-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .results-buttons {
+    flex-direction: column;
+  }
+}
