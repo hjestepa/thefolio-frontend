@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import API from '../api/axios';
 
-function LoginPage() {
+function RegisterPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();  // Removed 'user' since it wasn't used
   const { darkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
@@ -17,17 +17,10 @@ function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
-      navigate('/home');
+      await API.post('/auth/register', { name, email, password });
+      navigate('/login');
     } catch (err) {
-      // Check for specific error messages from backend
-      const errorMessage = err.response?.data?.message;
-      
-      if (errorMessage === 'Your account is deactivated. Please contact the admin.') {
-        setError('🚫 Your account has been deactivated. Please contact the administrator.');
-      } else {
-        setError('Invalid email or password. Please try again.');
-      }
+      setError(err.response?.data?.message || 'Registration failed');
       setLoading(false);
     }
   };
@@ -54,19 +47,17 @@ function LoginPage() {
             {darkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
         </div>
-        <h2>Login</h2>
-        {error && (
-          <p style={{ 
-            color: error.includes('deactivated') ? '#ff9800' : 'red',
-            backgroundColor: error.includes('deactivated') ? 'rgba(255, 152, 0, 0.1)' : 'rgba(255, 0, 0, 0.1)',
-            padding: '10px',
-            borderRadius: '5px',
-            marginBottom: '15px'
-          }}>
-            {error}
-          </p>
-        )}
+        <h2>Register</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={{ marginBottom: '15px' }}
+          />
           <input
             type="email"
             placeholder="Email"
@@ -77,22 +68,23 @@ function LoginPage() {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Password (min 6 characters)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            minLength="6"
             style={{ marginBottom: '20px' }}
           />
           <button type="submit" disabled={loading} style={{ width: '100%' }}>
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
         <p style={{ marginTop: '20px' }}>
-          Don't have an account? <Link to="/register">Register here</Link>
+          Already have an account? <Link to="/login">Login here</Link>
         </p>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
