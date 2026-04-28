@@ -51,7 +51,7 @@ function AboutPage() {
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '20px' }}>
             <img src="/images/animee1.png" alt="Anime artwork" style={{ maxWidth: '300px', borderRadius: '10px' }} />
-            <img src="/images/animee2.PNG" alt="Anime artwork" style={{ maxWidth: '300px', borderRadius: '10px' }} />
+            <img src="/images/animee2.png" alt="Anime artwork" style={{ maxWidth: '300px', borderRadius: '10px' }} />
           </div>
         </section>
 

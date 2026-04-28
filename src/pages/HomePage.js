@@ -64,7 +64,7 @@ function HomePage() {
         </p>
         <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <img src="/images/anime1.png" alt="Anime artwork" style={{ maxWidth: '280px', borderRadius: '15px' }} />
-          <img src="/images/anime2.PNG" alt="Anime artwork" style={{ maxWidth: '280px', borderRadius: '15px' }} />
+          <img src="/images/anime2.png" alt="Anime artwork" style={{ maxWidth: '280px', borderRadius: '15px' }} />
         </div>
       </div>
 
